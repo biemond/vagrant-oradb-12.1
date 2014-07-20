@@ -15,8 +15,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.synced_folder "/Users/edwin/software", "/software"
 
   config.vm.provider :virtualbox do |vb|
-    vb.customize ["modifyvm"     , :id, "--memory", "2532"]
-    vb.customize ["modifyvm"     , :id, "--name"  , "oradb"]
+    vb.customize ["modifyvm", :id, "--memory", "2532"]
+    vb.customize ["modifyvm", :id, "--name"  , "oradb"]
+    vb.customize ["modifyvm", :id, "--cpus"  , 2]
   end
 
   config.vm.provision :shell, :inline => "ln -sf /vagrant/puppet/hiera.yaml /etc/puppet/hiera.yaml;rm -rf /etc/puppet/modules;ln -sf /vagrant/puppet/modules /etc/puppet/modules"
