@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+forge "https://forgeapi.puppetlabs.com"
+
+# modules from the Puppet Forge
+mod 'fiddyspence/sysctl'
+mod 'erwbgy/limits'
+mod 'hajee/easy_type'
+mod 'hajee/oracle'
+
+# latest modules from git
+mod 'biemond/oradb',
+   :git => 'git@github.com:biemond/biemond-oradb.git'
