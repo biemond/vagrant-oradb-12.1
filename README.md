@@ -17,13 +17,13 @@ edit Vagrantfile and update the software share
 - linuxamd64_12c_database[1-2].zip
 
 ###Setup puppet modules from the desktop
--gem install librarian-puppet
--cd puppet
--rm -rf modules
--librarian-puppet install
+- gem install librarian-puppet
+- cd puppet
+- rm -rf modules
+- librarian-puppet install
 
 ## Startup the database server  
-vagrant up
+- vagrant up
 
 ##user accounts
 - OS oracle, pw oracle
