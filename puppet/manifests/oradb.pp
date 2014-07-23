@@ -46,7 +46,7 @@ class oradb_os {
   user { 'oracle' :
     ensure      => present,
     uid         => 500,
-    gid         => 'oinstall',  
+    gid         => 'oinstall',
     groups      => $groups,
     shell       => '/bin/bash',
     password    => '$1$DSJ51vh6$4XzzwyIOk6Bi/54kglGk3.',
@@ -98,9 +98,9 @@ class oradb_os {
 class oradb_12c {
   require oradb_os
 
-    oradb::installdb{ '12.1.0.1_Linux-x86-64':
-      version                => '12.1.0.1',
-      file                   => 'linuxamd64_12c_database',
+    oradb::installdb{ '12.1.0.2_Linux-x86-64':
+      version                => '12.1.0.2',
+      file                   => 'V46095-01',
       databaseType           => 'EE',
       oracleBase             => hiera('oracle_base_dir'),
       oracleHome             => hiera('oracle_home_dir'),
@@ -113,7 +113,7 @@ class oradb_12c {
       group_oper             => 'oper',
       downloadDir            => hiera('oracle_download_dir'),
       remoteFile             => false,
-      puppetDownloadMntPoint => hiera('oracle_source'),  
+      puppetDownloadMntPoint => hiera('oracle_source'),
     }
 
     oradb::net{ 'config net':
@@ -122,7 +122,7 @@ class oradb_12c {
       user         => hiera('oracle_os_user'),
       group        => hiera('oracle_os_group'),
       downloadDir  => hiera('oracle_download_dir'),
-      require      => Oradb::Installdb['12.1.0.1_Linux-x86-64'],
+      require      => Oradb::Installdb['12.1.0.2_Linux-x86-64'],
     }
 
     oradb::listener{'start listener':

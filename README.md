@@ -13,8 +13,9 @@ Add the Oracle binaries to the /software share
 edit Vagrantfile and update the software share
 - oradb.vm.synced_folder "/Users/edwin/software", "/software"
 
-###Satabase software
-- linuxamd64_12c_database[1-2].zip
+###Database software
+- V46095-01_1of2.zip
+- V46095-01_2of2.zip
 
 ###Setup puppet modules from the desktop
 - gem install librarian-puppet
