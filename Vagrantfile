@@ -11,7 +11,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.hostname = "oradb.example.com"
   config.vm.network :private_network, ip: "10.10.10.5"
 
-  config.vm.synced_folder "."                    , "/vagrant", :mount_options => ["dmode=777","fmode=777"]
+  config.vm.synced_folder "." , "/vagrant", :mount_options => ["dmode=777","fmode=777"]
   config.vm.synced_folder "/Users/edwin/software", "/software"
 
   config.vm.provider :virtualbox do |vb|
