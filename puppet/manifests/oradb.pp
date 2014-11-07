@@ -58,8 +58,8 @@ class oradb_os {
   $install = [ 'binutils.x86_64', 'compat-libstdc++-33.x86_64', 'glibc.x86_64','ksh.x86_64','libaio.x86_64',
                'libgcc.x86_64', 'libstdc++.x86_64', 'make.x86_64','compat-libcap1.x86_64', 'gcc.x86_64',
                'gcc-c++.x86_64','glibc-devel.x86_64','libaio-devel.x86_64','libstdc++-devel.x86_64',
-               'sysstat.x86_64','unixODBC-devel','glibc.i686','libXext.i686','libXtst.i686']
-       
+               'sysstat.x86_64','unixODBC-devel','glibc.i686','libXext.x86_64','libXtst.x86_64']
+
 
   package { $install:
     ensure  => present,
@@ -74,7 +74,7 @@ class oradb_os {
                 },
      use_hiera => false,
   }
- 
+
   sysctl { 'kernel.msgmnb':                 ensure => 'present', permanent => 'yes', value => '65536',}
   sysctl { 'kernel.msgmax':                 ensure => 'present', permanent => 'yes', value => '65536',}
   sysctl { 'kernel.shmmax':                 ensure => 'present', permanent => 'yes', value => '2588483584',}
@@ -129,11 +129,11 @@ class oradb_12c {
       oracleHome   => hiera('oracle_home_dir'),
       user         => hiera('oracle_os_user'),
       group        => hiera('oracle_os_group'),
-      action       => 'start',  
+      action       => 'start',
       require      => Oradb::Net['config net'],
     }
 
-    oradb::database{ 'oraDb': 
+    oradb::database{ 'oraDb':
       oracleBase              => hiera('oracle_base_dir'),
       oracleHome              => hiera('oracle_home_dir'),
       version                 => '12.1',
@@ -153,11 +153,11 @@ class oradb_12c {
       sampleSchema            => 'FALSE',
       memoryPercentage        => "40",
       memoryTotal             => "800",
-      databaseType            => "MULTIPURPOSE",                         
+      databaseType            => "MULTIPURPOSE",
       require                 => Oradb::Listener['start listener'],
     }
 
-    oradb::dbactions{ 'start oraDb': 
+    oradb::dbactions{ 'start oraDb':
       oracleHome              => hiera('oracle_home_dir'),
       user                    => hiera('oracle_os_user'),
       group                   => hiera('oracle_os_group'),
@@ -166,7 +166,7 @@ class oradb_12c {
       require                 => Oradb::Database['oraDb'],
     }
 
-    oradb::autostartdatabase{ 'autostart oracle': 
+    oradb::autostartdatabase{ 'autostart oracle':
       oracleHome              => hiera('oracle_home_dir'),
       user                    => hiera('oracle_os_user'),
       dbName                  => hiera('oracle_database_name'),
@@ -214,10 +214,10 @@ class oradb_maintenance {
   require oradb_12c
 
   case $operatingsystem {
-    CentOS, RedHat, OracleLinux, Ubuntu, Debian: { 
+    CentOS, RedHat, OracleLinux, Ubuntu, Debian: {
       $mtimeParam = "1"
     }
-    Solaris: { 
+    Solaris: {
       $mtimeParam = "+1"
     }
   }
